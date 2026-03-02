@@ -18,10 +18,8 @@ Rational::Rational(int n, int d) : num(n), denom(d == 0 ? 1 : d) {}
 
 
 Rational& Rational::operator += (const Rational& r) {
-    long long n = 1LL * num * r.denom + 1LL * denom * r.num;
-    long long d = 1LL * denom * r.denom;
-    num = static_cast<int>(n);
-    denom = static_cast<int>(d);
+     num = (numer*r.denom+denom*r.numer);
+    denom *= r.denom;
 
     return *this;
 }
@@ -32,19 +30,9 @@ Rational Rational::operator + (const Rational& r) const {
 }
 
 Rational& Rational::operator -= (const Rational& r) {
-    long long n = 1LL * num * r.denom - 1LL * denom * r.num;
-    long long d = 1LL * denom * r.denom;
-    num = static_cast<int>(n);
-    denom = static_cast<int>(d);
-    
-    return *this;
-}
-Rational Rational::operator - (const Rational& r) const {
-    Rational tmp(*this);
-    tmp -= r;
-    return tmp;
-}
 
+    return (*this += (-r)) ;
+}
 Rational Rational::operator - () const {
     return Rational(-num, denom);
 }
