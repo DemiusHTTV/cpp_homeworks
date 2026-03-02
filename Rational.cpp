@@ -37,29 +37,12 @@ Rational Rational::operator - () const {
     return Rational(-num, denom);
 }
 
-Rational& Rational::operator *= (const Rational& r) {
-    long long n = 1LL * num * r.num;
-    long long d = 1LL * denom * r.denom;
-    num = static_cast<int>(n);
-    denom = static_cast<int>(d);
- 
-    return *this;
-}
 Rational Rational::operator * (const Rational& r) const {
     Rational tmp(*this);
     tmp *= r;
     return tmp;
 }
 
-Rational& Rational::operator /= (const Rational& r) {
-    long long n = 1LL * num * r.denom;
-    long long d = 1LL * denom * r.num;
-    if (d == 0) d = 1;
-    num = static_cast<int>(n);
-    denom = static_cast<int>(d);
-   
-    return *this;
-}
 Rational Rational::operator / (const Rational& r) const {
     Rational tmp(*this);
     tmp /= r;
