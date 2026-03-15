@@ -12,8 +12,6 @@ int main() {
     b = Rational(b.num, b.denom);
     c = Rational(c.num, c.denom);
 
-    cout << "\n--- Тестирование арифметики ---\n";
-
   cout << "\n--- Тестирование арифметики ---\n";
 
 // сложение
