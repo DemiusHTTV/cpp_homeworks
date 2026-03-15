@@ -1,4 +1,9 @@
-#pragma once
+//#pragma once
+#ifndef RATIONAL_H
+#define RATIONAL_H  
+
+
+using namespace std;
 
 class Rational {
 private:
@@ -31,10 +36,14 @@ public:
     bool operator <= (const Rational& r) const;
     bool operator >= (const Rational& r) const; 
     bool operator == (const Rational& r) const;
-Rational& simplify(Rational& r);
-Rational FromDouble(    double d);
-
+   
+    friend istream& operator >>(istream& in, Rational& r);
+friend ostream& operator <<(ostream& out, const Rational& r);
 };
 
 void printR(const Rational& r);
-void squareEquation(const Rational& a, const Rational& b, const Rational& c);
+ Rational& simplify(Rational& r);
+    Rational FromDouble( double d);
+    void squareEquation(const Rational& a, const Rational& b, const Rational& c);
+    Rational sqrtRational(const Rational&r);
+#endif
