@@ -1,6 +1,7 @@
 #include "headers/Rational.h"
 #include <iostream>
 #include <cmath>
+#include <stdexcept>
 
 using namespace std;
 Rational::Rational()
@@ -26,7 +27,16 @@ Rational& Rational::operator += (const Rational& r)
     denom=denom*r.denom;
     return *this;
 }
-
+istream& operator >>(istream& in, Rational& r)
+{
+in>>r.num>>r.denom;
+return in;
+}
+ostream& operator <<(ostream& out, const Rational& r)
+{
+out<<r.num<<"/"<<r.denom;
+return out;
+}
 Rational Rational::operator +(const Rational& r) const{
     Rational res(*this);
     res += r;
@@ -99,6 +109,7 @@ bool Rational :: operator >=(const Rational& r) const{
 bool Rational :: operator ==(const Rational& r) const{
     return num*r.denom == denom*r.num;
 }   
+
 Rational& simplify (Rational& r){
     int a =r.num;
     int b =r.denom;
@@ -115,6 +126,7 @@ Rational& simplify (Rational& r){
         r.num=-r.num;}
     return r;
 }
+
 Rational FromDouble(double d, double eps = 1e-6, int maxDenom = 1000) {
     int denom = 1;
     int num = 0;
@@ -131,13 +143,45 @@ Rational FromDouble(double d, double eps = 1e-6, int maxDenom = 1000) {
     simplify(r); 
     return r;
 }
- void squareEquation(const Rational& a, const Rational& b, const Rational& c);{
+bool isPerfectSquare(int n) {
+    if (n < 0) return false;
+    int r = (int)std::sqrt(n);
+    return r*r == n;
+}
+Rational sqrtRational(const Rational&r){
+ if (!isPerfectSquare(r.num) || !isPerfectSquare(r.denom)) {
+        throw std::runtime_error("Дискриминант не является квадратом рационального числа");
+    }
+    return Rational((int)sqrt(r.num), (int)sqrt(r.denom));
+}
+
+ void squareEquation(const Rational& a, const Rational& b, const Rational& c){
     if (a.num == Rational(0).num) {
         if (b.num ==Rational(0).num) {
             cout<<"нет решения"<<endl;
             return;
         }
+        double x = - (double)b.num / b.denom / ((double)c.num / c.denom);
+        cout << "x = " << x << "\n";
+        return;
         cout << "Not a quadratic equation." << endl;
         return;
+        
+    }
+    Rational four(4,1);
+    Rational two(2,1);
+
+    Rational D = b*b - four*a*c;
+     if (D.num < 0) {
+        cout << "Нет вещественных рациональных корней\n";
+        return;
+    }
+     try {
+  Rational sqrtD = sqrtRational(D);
+        Rational x1 = (-b + sqrtD) / (a*two);
+        Rational x2 = (-b - sqrtD) / (a*two);
+        cout << "x1 = " << x1 << ", x2 = " << x2 << "\n";
+    } catch (runtime_error& e) {
+        cout << "Error: " << "\n";
     }
  }
