@@ -32,6 +32,7 @@ int main(){
 		arr.remove(i);
 	cout << arr << endl;
 
+	cout<<"--- Тестирование Иосифа Флавия ---\n";
 	ofstream csv("results.csv");
 	csv << "N,k,Time\n";
 	int arr1[]= {1000,5000,10000,50000,100000,500000,1000000};
