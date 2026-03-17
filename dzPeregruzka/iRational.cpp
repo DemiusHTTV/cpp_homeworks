@@ -143,45 +143,17 @@ Rational FromDouble(double d, double eps = 1e-6, int maxDenom = 1000) {
     simplify(r); 
     return r;
 }
+
+Rational sqrtRational(const Rational&r){
+ if (!isPerfectSquare(r.num) || !isPerfectSquare(r.denom)) {
+        throw runtime_error("Дискриминант не является квадратом рационального числа");
+    }
+    return Rational((int)sqrt(r.num), (int)sqrt(r.denom));
+}
 bool isPerfectSquare(int n) {
     if (n < 0) return false;
     int r = (int)std::sqrt(n);
     return r*r == n;
 }
-Rational sqrtRational(const Rational&r){
- if (!isPerfectSquare(r.num) || !isPerfectSquare(r.denom)) {
-        throw std::runtime_error("Дискриминант не является квадратом рационального числа");
-    }
-    return Rational((int)sqrt(r.num), (int)sqrt(r.denom));
-}
 
- void squareEquation(const Rational& a, const Rational& b, const Rational& c){
-    if (a.num == Rational(0).num) {
-        if (b.num ==Rational(0).num) {
-            cout<<"нет решения"<<endl;
-            return;
-        }
-        double x = - (double)b.num / b.denom / ((double)c.num / c.denom);
-        cout << "x = " << x << "\n";
-        return;
-        cout << "Not a quadratic equation." << endl;
-        return;
-        
-    }
-    Rational four(4,1);
-    Rational two(2,1);
-
-    Rational D = b*b - four*a*c;
-     if (D.num < 0) {
-        cout << "Нет вещественных рациональных корней\n";
-        return;
-    }
-     try {
-  Rational sqrtD = sqrtRational(D);
-        Rational x1 = (-b + sqrtD) / (a*two);
-        Rational x2 = (-b - sqrtD) / (a*two);
-        cout << "x1 = " << x1 << ", x2 = " << x2 << "\n";
-    } catch (runtime_error& e) {
-        cout << "Error: " << "\n";
-    }
- }
+ 
