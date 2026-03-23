@@ -1,0 +1,159 @@
+#include "rational.h"
+#include <iostream>
+#include <cmath>
+#include <stdexcept>
+
+using namespace std;
+Rational::Rational()
+{
+    num=0;
+    denom=1;
+}
+
+Rational :: Rational(int n)
+{
+    num=n;
+    denom=1;
+}
+Rational :: Rational(int n, int d)
+{
+    num=n;
+    denom=d;
+}   
+
+Rational& Rational::operator += (const Rational& r)
+{
+    num=num*r.denom+denom*r.num;
+    denom=denom*r.denom;
+    return *this;
+}
+istream& operator >>(istream& in, Rational& r)
+{
+in>>r.num>>r.denom;
+return in;
+}
+ostream& operator <<(ostream& out, const Rational& r)
+{
+out<<r.num<<"/"<<r.denom;
+return out;
+}
+Rational Rational::operator +(const Rational& r) const{
+    Rational res(*this);
+    res += r;
+    return res;
+}
+Rational Rational::operator -() const{
+    Rational r(- num, denom);
+    return r;
+}
+Rational Rational::operator -(const Rational& r) const{
+    Rational res(*this);
+    res += -r;
+    return res;
+}
+Rational& Rational::operator -= (const Rational& r){
+    *this += -r;
+    return *this;
+}
+Rational& Rational::operator ++(){
+    *this += Rational(1,1);
+    return *this;
+}
+Rational Rational :: operator ++(int){
+    Rational res(*this);
+    *this += Rational(1,1);
+    return res;
+}
+Rational::operator int() const{
+    return num/denom;
+}
+Rational::operator double() const{
+    return (double)num/denom;
+}
+Rational& Rational::operator *= (const Rational& r){
+    num=num*r.num;
+    denom=denom*r.denom;
+    return *this;
+}
+Rational Rational::operator * (const Rational& r) const{
+    Rational res(*this);
+    res *=r;
+    return res;
+}
+Rational& Rational ::operator/=(const Rational& r){
+    num = num*r.denom;
+    denom = denom*r.num;
+    return *this;
+}
+Rational Rational :: operator / (const Rational& r) const{
+    Rational res(*this);
+    res /= r;
+    return res;
+}
+bool Rational :: operator!=(const Rational&r) const{
+    return num*r.denom != denom*r.num;
+}
+bool Rational :: operator<(const Rational&r) const{
+    return num*r.denom < denom*r.num;
+}
+bool Rational :: operator >(const Rational& r) const{
+    return num*r.denom > denom*r.num;
+
+}
+bool Rational :: operator <=(const Rational& r) const{
+    return num*r.denom <= denom*r.num;
+}
+bool Rational :: operator >=(const Rational& r) const{
+    return num*r.denom >= denom*r.num;
+}
+bool Rational :: operator ==(const Rational& r) const{
+    return num*r.denom == denom*r.num;
+}   
+
+Rational& simplify (Rational& r){
+    int a =r.num;
+    int b =r.denom;
+    while(b!=0){
+        int t=b;
+        b=a%b;
+        a=t;
+    }
+    int g =a;
+    r.num /= g;
+    r.denom /= g;
+    if(r.denom<0){
+        r.denom=-r.denom;
+        r.num=-r.num;}
+    return r;
+}
+
+Rational FromDouble(double d, double eps = 1e-6, int maxDenom = 1000) {
+    int denom = 1;
+    int num = 0;
+
+    while (denom <= maxDenom) {
+        num = round(d * denom);  
+        if (abs(d - (double)num / denom) < eps) {
+            break; 
+        }
+        denom++;
+    }
+
+    Rational r(num, denom);
+    simplify(r); 
+    return r;
+}
+
+Rational sqrtRational(const Rational&r){
+ if (!isPerfectSquare(r.num) || !isPerfectSquare(r.denom)) {
+        throw runtime_error("Дискриминант не является квадратом рационального числа");
+    }
+    return Rational((int)sqrt(r.num), (int)sqrt(r.denom));
+}
+bool isPerfectSquare(int n) {
+    if (n < 0) return false;
+    int r = (int)std::sqrt(n);
+    return r*r == n;
+}
+
+ 

@@ -1,7 +1,8 @@
 //#pragma once
 #ifndef RATIONAL_H
 #define RATIONAL_H  
-#include <iostream>
+
+
 using namespace std;
 
 class Rational {
@@ -42,6 +43,6 @@ friend ostream& operator <<(ostream& out, const Rational& r);
 
 void printR(const Rational& r);
  Rational& simplify(Rational& r);
-    Rational FromDouble( double d,double esp,int MaxDenom);
+    Rational FromDouble( double d);
     Rational sqrtRational(const Rational&r);
 #endif

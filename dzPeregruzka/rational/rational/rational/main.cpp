@@ -1,5 +1,5 @@
 #include <iostream>
-#include "headers/Rational.h"
+#include "rational.h"
 using namespace std;
 
 
@@ -27,8 +27,8 @@ void squareEquation(const Rational& a, const Rational& b, const Rational& c){
     }
      try {
   Rational sqrtD = sqrtRational(D);
-        Rational x1 = (-b + sqrtD) / (-a*two);
-        Rational x2 = (-b - sqrtD) / (-a*two);
+        Rational x1 = (-b + sqrtD) / (a*two);
+        Rational x2 = (-b - sqrtD) / (a*two);
         cout << "x1 = " << x1 << ", x2 = " << x2 << "\n";
     } catch (runtime_error& e) {
         cout << "Error: " << "\n";
@@ -78,7 +78,7 @@ cout << "8/12 simplified = " << r1 << "\n";
 
 // FromDouble
 double x = 0.75;
-Rational r2 = FromDouble(x,10000,100);
+Rational r2 = FromDouble(x);
 cout << "FromDouble(0.75) = " << r2 << "\n";
 
 squareEquation(a, b, c);
