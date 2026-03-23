@@ -76,10 +76,6 @@ Rational r1(8,12);
 simplify(r1);
 cout << "8/12 simplified = " << r1 << "\n";
 
-// FromDouble
-double x = 0.75;
-Rational r2 = FromDouble(x,10000,100);
-cout << "FromDouble(0.75) = " << r2 << "\n";
 
 squareEquation(a, b, c);
     return 0;

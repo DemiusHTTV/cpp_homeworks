@@ -127,22 +127,7 @@ Rational& simplify (Rational& r){
     return r;
 }
 
-Rational FromDouble(double d, double eps = 1e-6, int maxDenom = 1000) {
-    int denom = 1;
-    int num = 0;
 
-    while (denom <= maxDenom) {
-        num = round(d * denom);  
-        if (abs(d - (double)num / denom) < eps) {
-            break; 
-        }
-        denom++;
-    }
-
-    Rational r(num, denom);
-    simplify(r); 
-    return r;
-}
 
 bool isPerfectSquare(int n) {
     if (n < 0) return false;
