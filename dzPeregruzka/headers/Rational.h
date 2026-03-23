@@ -42,6 +42,5 @@ friend ostream& operator <<(ostream& out, const Rational& r);
 
 void printR(const Rational& r);
  Rational& simplify(Rational& r);
-    Rational FromDouble( double d,double esp,int MaxDenom);
     Rational sqrtRational(const Rational&r);
 #endif
