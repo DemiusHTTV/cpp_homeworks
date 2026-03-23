@@ -2,17 +2,8 @@
 #include "headers/Rational.h"
 using namespace std;
 
-bool isPerfectSquare(int n) {
-    if (n < 0) return false;
-    int r = (int)std::sqrt(n);
-    return r*r == n;
-}
-Rational sqrtRational(const Rational&r){
- if (!isPerfectSquare(r.num) || !isPerfectSquare(r.denom)) {
-        throw runtime_error("Дискриминант не является квадратом рационального числа");
-    }
-    return Rational((int)sqrt(r.num), (int)sqrt(r.denom));
-}
+
+
 void squareEquation(const Rational& a, const Rational& b, const Rational& c){
     if (a.num == Rational(0).num) {
         if (b.num ==Rational(0).num) {
