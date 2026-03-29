@@ -9,12 +9,12 @@ private:
    
 
 public:
-    int num;
-    int denom;
+    long long num;
+    long long  denom;
     
     Rational();
-    Rational(int n);
-    Rational(int n, int d);
+    Rational(long long n);
+    Rational(long long n, long long d);
 
     Rational& operator += (const Rational& r);
     Rational operator + (const Rational& r) const;
@@ -41,6 +41,6 @@ friend ostream& operator <<(ostream& out, const Rational& r);
 };
 
 void printR(const Rational& r);
+Rational fromDouble(double d);
  Rational& simplify(Rational& r);
-    Rational sqrtRational(const Rational&r);
 #endif

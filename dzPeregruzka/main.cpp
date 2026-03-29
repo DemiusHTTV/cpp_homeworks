@@ -78,5 +78,6 @@ cout << "8/12 simplified = " << r1 << "\n";
 
 
 squareEquation(a, b, c);
+
     return 0;
 }

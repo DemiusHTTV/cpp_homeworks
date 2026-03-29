@@ -10,12 +10,12 @@ Rational::Rational()
     denom=1;
 }
 
-Rational :: Rational(int n)
+Rational :: Rational(long long n)
 {
     num=n;
     denom=1;
 }
-Rational :: Rational(int n, int d)
+Rational :: Rational(long long n, long long d)
 {
     num=n;
     denom=d;
@@ -110,36 +110,51 @@ bool Rational :: operator ==(const Rational& r) const{
     return num*r.denom == denom*r.num;
 }   
 
-Rational& simplify (Rational& r){
-    int a =r.num;
-    int b =r.denom;
-    while(b!=0){
-        int t=b;
-        b=a%b;
-        a=t;
+Rational& simplify(Rational& r) {
+    long long a = r.num;
+    long long b = r.denom;
+
+    if (a == 0) { r.denom = 1; return r; }
+    if (a < 0) a = -a;
+    if (b < 0) b = -b;
+
+    while (b != 0) {
+        long long t = b;
+        b = a % b;
+        a = t;
     }
-    int g =a;
-    r.num /= g;
+    long long g = (a == 0) ? 1 : a;
+
+    r.num   /= g;
     r.denom /= g;
-    if(r.denom<0){
-        r.denom=-r.denom;
-        r.num=-r.num;}
+    if (r.denom < 0) { r.denom = -r.denom; r.num = -r.num; }
     return r;
 }
 
 
 
-bool isPerfectSquare(int n) {
-    if (n < 0) return false;
-    int r = (int)std::sqrt(n);
-    return r*r == n;
+Rational fromDouble(double d) {
+    uint64_t bits = *(uint64_t*)&d;
+
+    int sign = (bits >> 63) & 1;
+    int exp  = (bits >> 52) & 0x7FF;
+    uint64_t mantisa = bits & 0xFFFFFFFFFFFFFULL;
+
+    int k = exp - 1023;
+    long long sgn = sign ? -1LL : 1LL;
+
+    long long num   = (1ULL << 52) | mantisa; // скрытая единица
+    long long denom = 1ULL << 52;
+
+    if (k > 0)      num   <<= k;
+    else            denom <<= (-k);
+
+    num *= sgn;
+
+    Rational r(num, denom);
+    simplify(r);
+    return r;
 }
 
-Rational sqrtRational(const Rational&r){
- if (!isPerfectSquare(r.num) || !isPerfectSquare(r.denom)) {
-        throw runtime_error("Дискриминант не является квадратом рационального числа");
-    }
-    return Rational((int)sqrt(r.num), (int)sqrt(r.denom));
-}
 
- 
+
