@@ -2,30 +2,30 @@
 
 class DateTime {
 private:
-		int year;
-	int mounth;
-	int day;
-	int hours;
-	int minutes;
-	int seconds;
-	
+    int year;
+    int month;
+    int day;
+    int hour;
+    int minute;
+    int second;
 
 public:
-	DateTime();
-	DateTime(int y, int mm, int dd,int hh, int mm, int ss);
-	DateTime(int year, int mounth, int day);
-	DateTime(int hh, int mm, int ss);
-	DateTime::operator+(int daysToAdd);
- 	bool operator==(const DateTime& other) const;
+    DateTime();
+    DateTime(int y, int m, int d, int h, int min, int s);
+    DateTime(int y, int m, int d);
+
+    DateTime operator+(int daysToAdd) const;
+
+    bool operator==(const DateTime& other) const;
     bool operator!=(const DateTime& other) const;
     bool operator<(const DateTime& other) const;
     bool operator<=(const DateTime& other) const;
     bool operator>(const DateTime& other) const;
     bool operator>=(const DateTime& other) const;
 
-	bool isValid() const;
-	bool isLeapYear(int y) const;
-	int dayInMounth(int m,int y) const;
+    bool isValid() const;
+    static bool isLeapYear(int y);
+    static int daysInMonth(int m, int y);
 
-
-}
+    int dayOfWeek() const;
+};
