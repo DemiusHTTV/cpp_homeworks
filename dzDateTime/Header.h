@@ -28,4 +28,7 @@ public:
     static int daysInMonth(int m, int y);
 
     int dayOfWeek() const;
+
+    // Returns ordinal day of Easter Sunday within the given year (1..365/366)
+    int calculateEasterDate(int y) const;
 };
