@@ -15,20 +15,18 @@ public:
     DateTime(int y, int m, int d);
 
     DateTime operator+(int daysToAdd) const;
-
+    DateTime operator-(int daysToSub) const;
+    int operator-(const DateTime& other) const;
     bool operator==(const DateTime& other) const;
     bool operator!=(const DateTime& other) const;
     bool operator<(const DateTime& other) const;
     bool operator<=(const DateTime& other) const;
     bool operator>(const DateTime& other) const;
     bool operator>=(const DateTime& other) const;
-
+    static long long gregorianToJulian(int y, int m, int d);
     bool isValid() const;
     static bool isLeapYear(int y);
     static int daysInMonth(int m, int y);
-
-    int dayOfWeek() const;
-
-    // Returns ordinal day of Easter Sunday within the given year (1..365/366)
     int calculateEasterDate(int y) const;
+    int dayOfWeek() const;
 };

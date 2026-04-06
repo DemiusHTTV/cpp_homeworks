@@ -45,7 +45,7 @@ int DateTime::dayOfWeek() const {
     int m = month;
     if (m < 3) y -= 1;
     int w = (y + y/4 - y/100 + y/400 + monthOffsets[m-1] + day) % 7; // 0=Sunday
-    if (w == 0) return 7; 
+    if (w == 0) return 7;
     return w;
 }
 
@@ -72,11 +72,45 @@ DateTime DateTime::operator+(int daysToAdd) const {
 
     return result;
 }
-int DateTime::calculateEasterDate(int y) const {
-    // Meeus/Jones/Butcher algorithm: returns ordinal day of Easter Sunday
-    int a = y % 19;
-    int b = y / 100;
-    int c = y % 100;
+
+DateTime DateTime::operator-(int daysToSub) const {
+    DateTime result = *this;
+    int days = daysToSub;
+    while (days > 0) {
+        if (result.day > 1) {
+            int move = std::min(result.day - 1, days);
+            result.day -= move;
+            days -= move;
+        } else {
+            result.month--;
+            if (result.month == 0) {
+                result.month = 12;
+                result.year--;
+            }
+            result.day = daysInMonth(result.month, result.year);
+            days -= 1;
+        }
+    }
+    return result;
+}
+
+int DateTime::operator-(const DateTime& other) const {
+    long long j1 = gregorianToJulian(year, month, day);
+    long long j2 = gregorianToJulian(other.year, other.month, other.day);
+    return static_cast<int>(j1 - j2);
+}
+long long DateTime::gregorianToJulian(int y, int m, int d) {
+    if (m <= 2) {
+        y--;
+        m += 12;
+    }
+    return 365LL * y + y / 4 - y / 100 + y / 400 + (153LL * (m - 3) + 2) / 5 + d - 1;
+}
+
+int DateTime::calculateEasterDate(int year) const {
+    int a = year % 19;
+    int b = year / 100;
+    int c = year % 100;
     int d = b / 4;
     int e = b % 4;
     int f = (b + 8) / 25;
@@ -86,16 +120,17 @@ int DateTime::calculateEasterDate(int y) const {
     int k = c % 4;
     int l = (32 + 2 * e + 2 * i - h - k) % 7;
     int m = (a + 11 * h + 22 * l) / 451;
-    int month = (h + l - 7 * m + 114) / 31;           // 3=March, 4=April
-    int day = ((h + l - 7 * m + 114) % 31) + 1;       // day of month
-
-    int ordinal = day;
-    for (int mm = 1; mm < month; ++mm) {
-        if (mm == 4 || mm == 6 || mm == 9 || mm == 11) ordinal += 30;
-        else if (mm == 2) ordinal += isLeapYear(y) ? 29 : 28;
-        else ordinal += 31;
+    int month = (h + l - 7 * m + 114) / 31;
+    int day = ((h + l - 7 * m + 114) % 31) + 1;
+    
+    int dayOfYear = day;
+    for (int m = 1; m < month; m++) {
+        int daysInM = 31;
+        if (m == 4 || m == 6 || m == 9 || m == 11) daysInM = 30;
+        else if (m == 2) daysInM = isLeapYear(year) ? 29 : 28;
+        dayOfYear += daysInM;
     }
-    return ordinal; // 1..365/366
+    return dayOfYear;
 }
 bool DateTime::operator==(const DateTime& other) const {
     return year == other.year && month == other.month && day == other.day &&
