@@ -5,34 +5,25 @@ using namespace std;
 
 
 void squareEquation(const Rational& a, const Rational& b, const Rational& c){
-    if (a.num == Rational(0).num) {
-        if (b.num ==Rational(0).num) {
+   double aDouble=double(a);
+   double bDouble= double(b);
+   double cDouble=double(c);
+    
+    if(aDouble==0.0){
+        if(bDouble == 0.0){
             cout<<"нет решения"<<endl;
-            return;
+            return;;
         }
-        double x = - (double)b.num / b.denom / ((double)c.num / c.denom);
-        cout << "x = " << x << "\n";
-        return;
-        cout << "Not a quadratic equation." << endl;
-        return;
-        
-    }
-    Rational four(4,1);
-    Rational two(2,1);
-
-    Rational D = b*b - four*a*c;
-     if (D.num < 0) {
-        cout << "Нет вещественных рациональных корней\n";
+        double x = -(bDouble / cDouble);
+        cout<<"x= "<<x;
         return;
     }
-     try {
-  Rational sqrtD = sqrtRational(D);
-        Rational x1 = (-b + sqrtD) / (-a*two);
-        Rational x2 = (-b - sqrtD) / (-a*two);
-        cout << "x1 = " << x1 << ", x2 = " << x2 << "\n";
-    } catch (runtime_error& e) {
-        cout << "Error: " << "\n";
-    }
+    double D = bDouble *bDouble - 4.0 *aDouble*cDouble;
+    if(D <0.0) {cout<< "Нет вещественных корней";}
+    double sqrtD = sqrt(D);
+       Rational x1 = fromDouble((-bDouble + sqrtD) / (2.0 * aDouble));
+       Rational x2 = fromDouble((-bDouble - sqrtD) / (2.0 * aDouble));
+       cout << "x1 ≈ " << x1 << ", x2 ≈ " << x2 << "\n";
  }
 
 int main() {
@@ -76,7 +67,9 @@ Rational r1(8,12);
 simplify(r1);
 cout << "8/12 simplified = " << r1 << "\n";
 
-
+    double tw =0.75;
+   
+    cout<<"tw = "<<fromDouble(tw)<<endl;
 squareEquation(a, b, c);
 
     return 0;
