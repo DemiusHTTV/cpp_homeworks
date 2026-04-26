@@ -1,4 +1,6 @@
 #include <iostream>
+#include <iomanip>
+#include <algorithm>
 #include "Header.h"
 
 DateTime::DateTime()
@@ -153,3 +155,15 @@ bool DateTime::operator<=(const DateTime& other) const { return *this < other ||
 bool DateTime::operator>(const DateTime& other) const { return other < *this; }
 
 bool DateTime::operator>=(const DateTime& other) const { return other <= *this; }
+
+void DateTime::printFormat1(std::ostream& os) const {
+    std::ostream::fmtflags oldFlags = os.flags();
+    char oldFill = os.fill();
+
+    os << year << '-'
+       << std::setfill('0') << std::setw(2) << month << '-'
+       << std::setfill('0') << std::setw(2) << day;
+
+    os.flags(oldFlags);
+    os.fill(oldFill);
+}

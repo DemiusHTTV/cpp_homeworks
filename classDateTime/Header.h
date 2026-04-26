@@ -1,4 +1,5 @@
 #pragma once
+#include <iosfwd>
 
 class DateTime {
 private:
@@ -13,6 +14,13 @@ public:
     DateTime();
     DateTime(int y, int m, int d, int h, int min, int s);
     DateTime(int y, int m, int d);
+
+    int getYear() const { return year; }
+    int getMonth() const { return month; }
+    int getDay() const { return day; }
+    int getHour() const { return hour; }
+    int getMinute() const { return minute; }
+    int getSecond() const { return second; }
 
     DateTime operator+(int daysToAdd) const;
     DateTime operator-(int daysToSub) const;
@@ -29,4 +37,6 @@ public:
     static int daysInMonth(int m, int y);
     int calculateEasterDate(int y) const;
     int dayOfWeek() const;
+
+    void printFormat1(std::ostream& os) const;
 };
