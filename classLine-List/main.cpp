@@ -12,7 +12,7 @@ static int josephus_list(int n, int k) {
     LineList<int> list;
     for (int i = n; i >= 1; --i) list.insertFirst(i);
 
-    LineListElem<int>* prev = list.getTail();
+    LineListElements<int>* prev = list.getTail();
     int remaining = n;
 
     while (remaining > 1) {
