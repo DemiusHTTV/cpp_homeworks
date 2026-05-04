@@ -2,39 +2,9 @@
 #include <set>
 #include <queue>
 #include <string>
+#include "node.h"
+#include "graph.h"
 
-class Node {
-    std::string name;
-    std::set<Node*> neighbours;
-
-public:
-    Node(const std::string& n) : name(n) {}
-
-    void addNeighbour(Node* n) {
-        neighbours.insert(n);
-    }
-
-    const std::string& getName() const {
-        return name;
-    }
-
-    std::set<Node*>::iterator begin() { return neighbours.begin(); }
-    std::set<Node*>::iterator end() { return neighbours.end(); }
-};
-
-class Graph {
-    std::set<Node*> nodes;
-
-public:
-    void addNode(Node* n) {
-        nodes.insert(n);
-    }
-
-    void addEdge(Node* a, Node* b) {
-        a->addNeighbour(b);
-        b->addNeighbour(a);
-    }
-};
 
 
 // ================= BFS =================
