@@ -1,9 +1,9 @@
 #include "Function.h"
 
-double Function::integrate(double a, double b, int n) const
+bool Function::integrate(double a, double b, int n, double& outResult) const
 {
     if (n <= 0)
-        throw std::invalid_argument("n must be positive");
+        return false;
 
     const double step = (b - a) / n;
 
@@ -13,15 +13,16 @@ double Function::integrate(double a, double b, int n) const
         const double x = a + step * i;
         sum += calc(x);
     }
-    return sum * step;
+    outResult = sum * step;
+    return true;
 }
 
-double Function::derivative(double x, double h) const
+bool Function::derivative(double x, double h, double& outResult) const
 {
     if (h == 0.0)
-        throw std::invalid_argument("h must be non-zero");
+        return false;
 
-    // Центральная разностная производная.
-    return (calc(x + h) - calc(x - h)) / (2.0 * h);
+    
+    outResult = (calc(x + h) - calc(x - h)) / (2.0 * h);
+    return true;
 }
-
