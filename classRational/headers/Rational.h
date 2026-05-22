@@ -35,12 +35,16 @@ public:
     bool operator <= (const Rational& r) const;
     bool operator >= (const Rational& r) const; 
     bool operator == (const Rational& r) const;
+
+    
    
     friend istream& operator >>(istream& in, Rational& r);
 friend ostream& operator <<(ostream& out, const Rational& r);
+
 };
 
 void printR(const Rational& r);
 Rational fromDouble(double d);
  Rational& simplify(Rational& r);
+ Rational squareVavilon(Rational& r,int iterations);
 #endif

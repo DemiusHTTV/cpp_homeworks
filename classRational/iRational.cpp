@@ -158,3 +158,22 @@ Rational fromDouble(double d) {
 
 
 
+Rational squareVavilon(Rational& r, int iterations) {
+  if (x < Rational(0)) {
+        throw std::invalid_argument("sqrt from negative");
+    }
+
+    if (x == Rational(0)) {
+        return Rational(0);
+    }
+
+    Rational two(2);
+    Rational cur = x;
+
+    for (int i = 0; i < iterations; i++) {
+        cur = (cur + x / cur) / two;
+        simplify(cur);
+    }
+
+    return cur;
+}

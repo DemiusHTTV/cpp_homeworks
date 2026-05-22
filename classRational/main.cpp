@@ -3,28 +3,43 @@
 using namespace std;
 
 
-
-void squareEquation(const Rational& a, const Rational& b, const Rational& c){
-   double aDouble=double(a);
-   double bDouble= double(b);
-   double cDouble=double(c);
-    
-    if(aDouble==0.0){
-        if(bDouble == 0.0){
-            cout<<"нет решения"<<endl;
-            return;;
+void squareEquation(const Rational& a, const Rational& b, const Rational& c) {
+    if (a == Rational(0)) {
+        if (b == Rational(0)) {
+            cout << "Нет решения\n";
+            return;
         }
-        double x = -(bDouble / cDouble);
-        cout<<"x= "<<x;
+
+        Rational x = -c / b;
+        simplify(x);
+        cout << "x = " << x << endl;
         return;
     }
-    double D = bDouble *bDouble - 4.0 *aDouble*cDouble;
-    if(D <0.0) {cout<< "Нет вещественных корней";}
-    double sqrtD = sqrt(D);
-       Rational x1 = fromDouble((-bDouble + sqrtD) / (2.0 * aDouble));
-       Rational x2 = fromDouble((-bDouble - sqrtD) / (2.0 * aDouble));
-       cout << "x1 ≈ " << x1 << ", x2 ≈ " << x2 << "\n";
- }
+
+    Rational four(4);
+    Rational two(2);
+
+    Rational D = b * b - four * a * c;
+    simplify(D);
+
+    cout << "D = " << D << endl;
+
+    if (D < Rational(0)) {
+        cout << "Нет вещественных корней\n";
+        return;
+    }
+
+    Rational sqrtD = squareVavilon(D, 10);
+
+    Rational x1 = (-b + sqrtD) / (two * a);
+    Rational x2 = (-b - sqrtD) / (two * a);
+
+    simplify(x1);
+    simplify(x2);
+
+    cout << "x1 = " << x1 << endl;
+    cout << "x2 = " << x2 << endl;
+}
 
 int main() {
     Rational a, b, c;
@@ -65,12 +80,20 @@ cout << "a < b? " << (a < b ? "true" : "false") << "\n";
 // упрощение
 Rational r1(8,12); 
 simplify(r1);
-cout << "8/12 simplified = " << r1 << "\n";
+cout << "a (num denom): ";
+cin >> a;
 
-    double tw =0.75;
-   
-    cout<<"tw = "<<fromDouble(tw)<<endl;
-squareEquation(a, b, c);
+cout << "b (num denom): ";
+cin >> b;
+
+cout << "c (num denom): ";
+cin >> c;
+
+    simplify(a);
+    simplify(b);
+    simplify(c);
+
+    squareEquation(a, b, c);
 
     return 0;
 }
