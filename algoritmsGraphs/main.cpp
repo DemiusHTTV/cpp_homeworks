@@ -47,6 +47,27 @@ bool DFS(Node* cur, Node* target, std::set<Node*>& visited) {
     return false;
 }
 
+    
+static void printDijkstra(const Graph& g, const std::string& startName) {
+    Node* start = g.getNode(startName);
+    if (start == nullptr) {
+        std::cout << "Вершина " << startName << " не найдена.\n";
+        return;
+    }
+
+    auto dist = g.dijkstra(start);
+    std::cout << "\nДейкстра от вершины " << startName << ":\n";
+    for (const auto& p : g.getNodes()) {
+        Node* node = p.second;
+        std::cout << startName << " -> " << node->getName() << " = ";
+        if (dist[node] == std::numeric_limits<int>::max()) {
+            std::cout << "INF";
+        } else {
+            std::cout << dist[node];
+        }
+        std::cout << '\n';
+    }
+}
 
 // ================= MAIN =================
 int main() {
@@ -70,6 +91,9 @@ int main() {
 
     std::set<Node*> visited;
     std::cout << "DFS A->D: " << DFS(a, d, visited) << std::endl;
+    
+    std::cout << "\n===== DIJKSTRA =====" << std::endl;
+    printDijkstra(g, "A");
 
     return 0;
 }
