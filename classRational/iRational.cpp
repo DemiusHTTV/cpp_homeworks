@@ -167,11 +167,11 @@ Rational squareVavilon(Rational& r, int iterations) {
         return Rational(0);
     }
 
-    Rational two(2);
+ 
     Rational cur = x;
 
     for (int i = 0; i < iterations; i++) {
-        cur = (cur + x / cur) / two;
+        cur = (cur + x / cur) / 2;
         simplify(cur);
     }
 
