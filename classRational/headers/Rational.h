@@ -35,6 +35,10 @@ public:
     bool operator <= (const Rational& r) const;
     bool operator >= (const Rational& r) const; 
     bool operator == (const Rational& r) const;
+   Rational& operator+=(int n);
+   Rational& operator-=(int n);
+   Rational& operator*=(int n);
+   Rational& operator/=(int n);
 
     
    
