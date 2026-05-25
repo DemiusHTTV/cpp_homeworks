@@ -177,3 +177,25 @@ Rational squareVavilon(Rational& r, int iterations) {
 
     return cur;
 }
+Rational& Rational::operator+=(int n) {
+    *this += Rational(n);
+    return *this;
+}
+
+Rational& Rational::operator-=(int n) {
+    *this -= Rational(n);
+    return *this;
+}
+
+Rational& Rational::operator*=(int n) {
+    *this *= Rational(n);
+    return *this;
+}
+
+Rational& Rational::operator/=(int n) {
+    if (n == 0) {
+        throw std::invalid_argument("Rational: division by zero");
+    }
+    *this /= Rational(n);
+    return *this;
+}
