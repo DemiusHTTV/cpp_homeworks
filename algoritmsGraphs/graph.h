@@ -1,17 +1,36 @@
-#pragma once
-#include <string>
-#include <set>  
+#ifndef GRAPH_H
+#define GRAPH_H
+
+#include <iostream>
+#include <set>
+#include <queue>
+#include <vector>
+#include <fstream>
+#include <map>
 #include "node.h"
+
+using namespace std;
+
 class Graph {
-    std::set<Node*> nodes;
+private:
+    set<Node*> nodes;
+    map<string, Node*> nodeMap;
 
 public:
-    void addNode(Node* n) {
-        nodes.insert(n);
-    }
+    Graph();
+    Graph(const char* file_name);
 
-    void addEdge(Node* a, Node* b) {
-        a->addNeighbour(b);
-        b->addNeighbour(a);
-    }
+    void addNode(Node* node);
+    void addEdge(Node* begin, Node* end);
+
+    Node* getNode(string name);
+
+    node_iterator begin();
+    node_iterator end();
+
+    vector<Graph> findGraphs();
+    void print();
+    void print2file(string fileName);
 };
+
+#endif

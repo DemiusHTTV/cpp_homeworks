@@ -1,19 +1,25 @@
 #pragma once
+#include <string>
+#include <map>
+
 class Node {
+private:
     std::string name;
-    std::set<Node*> neighbours;
+    std::map<Node*, int> neighbors;
 
 public:
-    Node(const std::string& n) : name(n) {}
+    Node(const std::string& nodeName) : name(nodeName) {}
 
-    void addNeighbour(Node* n) {
-        neighbours.insert(n);
-    }
-
-    const std::string& getName() const {
+    std::string getName() const {
         return name;
     }
 
-    std::set<Node*>::iterator begin() { return neighbours.begin(); }
-    std::set<Node*>::iterator end() { return neighbours.end(); }
+    void addNeighbor(Node* neighbor, int weight = 1) {
+        neighbors[neighbor] = weight;
+    }
+
+    auto begin() { return neighbors.begin(); }
+    auto end() { return neighbors.end(); }
+    auto begin() const { return neighbors.begin(); }
+    auto end() const { return neighbors.end(); }
 };
