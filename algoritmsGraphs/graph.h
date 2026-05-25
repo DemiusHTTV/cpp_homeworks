@@ -28,9 +28,9 @@ public:
     node_iterator begin();
     node_iterator end();
 
-    vector<Graph> findGraphs();
+
     void print();
-    void print2file(string fileName);
+ 
 };
 
 #endif
