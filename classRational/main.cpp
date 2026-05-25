@@ -4,8 +4,8 @@ using namespace std;
 
 
 void squareEquation(const Rational& a, const Rational& b, const Rational& c) {
-    if (a == Rational(0)) {
-        if (b == Rational(0)) {
+    if (a == 0) {
+        if (b == 0)) {
             cout << "Нет решения\n";
             return;
         }
@@ -16,10 +16,9 @@ void squareEquation(const Rational& a, const Rational& b, const Rational& c) {
         return;
     }
 
-    Rational four(4);
-    Rational two(2);
+  
 
-    Rational D = b * b - four * a * c;
+    Rational D = b * b - 4 * a * c;
     simplify(D);
 
     cout << "D = " << D << endl;
@@ -31,8 +30,8 @@ void squareEquation(const Rational& a, const Rational& b, const Rational& c) {
 
     Rational sqrtD = squareVavilon(D, 10);
 
-    Rational x1 = (-b + sqrtD) / (two * a);
-    Rational x2 = (-b - sqrtD) / (two * a);
+    Rational x1 = (-b + sqrtD) / (2 * a);
+    Rational x2 = (-b - sqrtD) / (2 * a);
 
     simplify(x1);
     simplify(x2);
