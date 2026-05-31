@@ -1,0 +1,22 @@
+@startuml
+
+class Sudoku
+{
+    - field : int[9][9]
+    - solution : int[9][9]
+    - fixedCells : bool[9][9]
+
+    + Sudoku()
+    + print() : void
+    + makeMove(row,col,value) : bool
+    + clearCell(row,col) : bool
+    + isFull() : bool
+    + isSolved() : bool
+
+    - fillBoard() : bool
+    - solveBoard() : bool
+    - countSolutions() : int
+    - removeCells() : void
+}
+
+@enduml

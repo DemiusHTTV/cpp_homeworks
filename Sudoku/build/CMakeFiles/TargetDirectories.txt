@@ -1,0 +1,3 @@
+/Users/sashabuzinaevicloud.com/Documents/dzC/Sudoku/build/CMakeFiles/sudoku.dir
+/Users/sashabuzinaevicloud.com/Documents/dzC/Sudoku/build/CMakeFiles/edit_cache.dir
+/Users/sashabuzinaevicloud.com/Documents/dzC/Sudoku/build/CMakeFiles/rebuild_cache.dir
