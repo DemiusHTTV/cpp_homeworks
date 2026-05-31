@@ -44,7 +44,7 @@ sudoku.exe
 
 
 
-![UML](docs/PosledMain.png.)
+![UML](docs/PosledMain.png)
 Исходный код диаграммы:
 [PosledDiagram.puml](docs/puml/MainPosled.puml)
 
