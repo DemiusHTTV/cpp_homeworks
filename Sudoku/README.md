@@ -21,29 +21,33 @@
 
 ## UML-диаграммы
 
+## Диаграмма структуры
+[Открыть PlantUML-файл](docs/puml/01_project_structure.puml)
+
+![Диаграмма классов](docs/01_project_structure.png)
 ### Диаграмма классов
 
-[Открыть PlantUML-файл](docs/class_diagram.puml)
+[Открыть PlantUML-файл](docs/puml/02_class_diagram.puml)
 
-![Диаграмма классов](docs/class_diagram.png)
+![Диаграмма классов](docs/02_class_diagram.png)
 
 ### Диаграмма вариантов использования
 
-[Открыть PlantUML-файл](docs/use_case_diagram.puml)
+[Открыть PlantUML-файл](docs/pml/03_use_case_diagram.puml)
 
-![Диаграмма вариантов использования](docs/use_case_diagram.png)
+![Диаграмма вариантов использования](docs/03_use_case_diagram.png)
 
 ### Диаграмма последовательности
 
-[Открыть PlantUML-файл](docs/sequence_diagram.puml)
+[Открыть PlantUML-файл](docs/puml/05_move_sequence_diagram.puml)
 
-![Диаграмма последовательности](docs/sequence_diagram.png)
+![Диаграмма последовательности](docs/05_move_sequence_diagram.png)
 
 ### Диаграмма активности
 
-[Открыть PlantUML-файл](docs/activity_diagram.puml)
+[Открыть PlantUML-файл](docs/puml/04_activity_diagram.puml)
 
-![Диаграмма активности](docs/activity_diagram.png)
+![Диаграмма активности](docs/04_activity_diagram.png)
 
 ## Сборка через g++
 

@@ -2,13 +2,44 @@
 skinparam shadowing false
 skinparam defaultFontName Arial
 
+title Общая диаграмма последовательности: генерация судоку и ход игрока
+
 actor "Игрок" as Player
 participant "main.cpp" as Main
 participant "GameManager" as GameManager
+participant "SudokuGenerator" as Generator
 participant "SudokuBoard" as Board
+participant "SudokuSolver" as Solver
+
+== Запуск игры и генерация поля ==
 
 Player -> Main : запускает программу
 Main -> GameManager : startGame()
+
+GameManager -> Generator : generate(board, 45)
+Generator -> Board : clear()
+Generator -> Board : getSolution()
+Generator -> Generator : fillBoard(solution, 0, 0)
+Generator -> Generator : shuffleArray(1..9)
+Generator -> Board : canPlace()
+Generator -> Board : copySolutionToField()
+
+loop Пока не удалено нужное количество клеток
+    Generator -> Board : setCell(row, col, EMPTY)
+    Generator -> Solver : countSolutions(temp, board, 2)
+
+    alt Решение единственное
+        Generator -> Board : оставить клетку пустой
+    else Решений несколько
+        Generator -> Board : вернуть число обратно
+    end
+end
+
+Generator -> Board : markFixedCells()
+Generator --> GameManager : поле готово
+
+== Игровой процесс и обработка хода ==
+
 GameManager -> Board : print()
 Board --> GameManager : вывод поля
 GameManager --> Player : показывает поле
