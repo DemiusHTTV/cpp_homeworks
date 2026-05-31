@@ -32,4 +32,26 @@ sudoku.exe
 ![UML](docs/ClassDiagram.png)
 
 Исходный код диаграммы:
-[ClassDiagram.puml](docs/ClassDiagram.puml)
+[ClassDiagram.puml](docs/puml/ClassDiagram.puml)
+
+![UML](docs/people.png)
+Исходный код диаграммы:
+[PosledDiagram.puml](docs/puml/people.puml)
+
+![UML](docs/StructureSudoku.png)
+Исходный код диаграммы:
+[PosledDiagram.puml](docs/puml/StructureProgect.puml)
+
+
+
+![UML](docs/PosledMain.png.)
+Исходный код диаграммы:
+[PosledDiagram.puml](docs/puml/MainPosled.puml)
+
+![UML](docs/PosledSudoku.png)
+Исходный код диаграммы:
+[PosledDiagram.puml](docs/puml/MainPosled.puml)
+
+![UML](docs/PosledDiagram.png)
+Исходный код диаграммы:
+[PosledDiagram.puml](docs/puml/PosledDiagram.puml)

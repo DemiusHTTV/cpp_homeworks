@@ -1,0 +1,23 @@
+@startuml
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam rectangle {
+    RoundCorner 10
+}
+
+rectangle "main.cpp" as Main #E3F2FD
+
+rectangle "Sudoku.h / .cpp" as Sudoku #E8F5E9
+rectangle "Игрок" as Player #F3E5F5
+rectangle "Генератор поля\nBacktracking" as Generator #FFF3E0
+rectangle "Проверка решения" as Solver #FFF3E0
+
+database "solution[9][9]\nfield[9][9]\nfixedCells[9][9]" as Data #ECEFF1
+
+Main --> Sudoku : создает объект
+Sudoku --> Player : управляет вводом
+Sudoku --> Generator : генерирует поле
+Sudoku --> Solver : проверяет ходы
+Generator --> Data : заполняет решение
+Solver --> Data : проверяет состояние
+@enduml
