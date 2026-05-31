@@ -1,14 +1,16 @@
 #pragma once
+
 #include <string>
+
+struct Point {
+    double x;
+    double y;
+};
 
 class Figure {
 public:
-    virtual double calc_area() = 0;
-    virtual double calc_perimeter() = 0;
-    virtual std::string name() = 0;
+    virtual double calc_perimeter() const = 0;
+    virtual std::string name() const = 0;
 
-    virtual ~Figure() {}
-};
-struct Point {
-    double x, y;
+    virtual ~Figure() = default;
 };

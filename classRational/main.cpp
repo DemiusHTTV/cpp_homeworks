@@ -1,11 +1,11 @@
 #include <iostream>
 #include "headers/Rational.h"
-using namespace std;
 
+using namespace std;
 
 void squareEquation(const Rational& a, const Rational& b, const Rational& c) {
     if (a == 0) {
-        if (b == 0)) {
+        if (b == 0) {
             cout << "Нет решения\n";
             return;
         }
@@ -16,22 +16,20 @@ void squareEquation(const Rational& a, const Rational& b, const Rational& c) {
         return;
     }
 
-  
-
-    Rational D = b * b - 4 * a * c;
+    Rational D = b * b - a * 4 * c;
     simplify(D);
 
     cout << "D = " << D << endl;
 
-    if (D < Rational(0)) {
+    if (D < 0) {
         cout << "Нет вещественных корней\n";
         return;
     }
 
     Rational sqrtD = squareVavilon(D, 10);
 
-    Rational x1 = (-b + sqrtD) / (2 * a);
-    Rational x2 = (-b - sqrtD) / (2 * a);
+    Rational x1 = (-b + sqrtD) / (a * 2);
+    Rational x2 = (-b - sqrtD) / (a * 2);
 
     simplify(x1);
     simplify(x2);
@@ -42,56 +40,45 @@ void squareEquation(const Rational& a, const Rational& b, const Rational& c) {
 
 int main() {
     Rational a, b, c;
-    cout << "a (num denom): "; cin >> a.num >> a.denom;
-    cout << "b (num denom): "; cin >> b.num >> b.denom;
-    cout << "c (num denom): "; cin >> c.num >> c.denom;
 
-    a = Rational(a.num, a.denom);
-    b = Rational(b.num, b.denom);
-    c = Rational(c.num, c.denom);
+    cout << "a (num denom): ";
+    cin >> a;
 
-  cout << "\n--- Тестирование арифметики ---\n";
+    cout << "b (num denom): ";
+    cin >> b;
 
-// сложение
-Rational sum = a + b;
-cout << "a + b = " << sum << "\n";
-
-// вычитание
-Rational diff = a - b;
-cout << "a - b = " << diff << "\n";
-
-// умножение
-Rational prod = a * b;
-cout << "a * b = " << prod << "\n";
-
-// деление
-Rational quot = a / b;
-cout << "a / b = " << quot << "\n";
-
-// унарный минус
-Rational negA = -a;
-cout << "-a = " << negA << "\n";
-
-// сравнения
-cout << "a == b? " << (a == b ? "true" : "false") << "\n";
-cout << "a < b? " << (a < b ? "true" : "false") << "\n";
-
-// упрощение
-Rational r1(8,12); 
-simplify(r1);
-cout << "a (num denom): ";
-cin >> a;
-
-cout << "b (num denom): ";
-cin >> b;
-
-cout << "c (num denom): ";
-cin >> c;
+    cout << "c (num denom): ";
+    cin >> c;
 
     simplify(a);
     simplify(b);
     simplify(c);
 
+    cout << "\n--- Тестирование арифметики ---\n";
+
+    Rational sum = a + b;
+    cout << "a + b = " << sum << "\n";
+
+    Rational diff = a - b;
+    cout << "a - b = " << diff << "\n";
+
+    Rational prod = a * b;
+    cout << "a * b = " << prod << "\n";
+
+    Rational quot = a / b;
+    cout << "a / b = " << quot << "\n";
+
+    Rational negA = -a;
+    cout << "-a = " << negA << "\n";
+
+    cout << "a == b? " << (a == b ? "true" : "false") << "\n";
+    cout << "a < b? " << (a < b ? "true" : "false") << "\n";
+
+    Rational r1(8, 12);
+    simplify(r1);
+    cout << "8/12 simplified = " << r1 << "\n";
+
+    cout << "\n--- Квадратное уравнение ---\n";
     squareEquation(a, b, c);
 
     return 0;

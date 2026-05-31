@@ -1,25 +1,30 @@
-#pragma once
+#ifndef NODE_H
+#define NODE_H
+
+#include <set>
 #include <string>
-#include <map>
+
+class Node;
+typedef std::set<Node*>::iterator node_iterator;
+typedef std::set<Node*>::const_iterator const_node_iterator;
 
 class Node {
 private:
     std::string name;
-    std::map<Node*, int> neighbors;
+    std::set<Node*> neighbours;
 
 public:
-    Node(const std::string& nodeName) : name(nodeName) {}
+    explicit Node(const std::string& nodeName);
 
-    std::string getName() const {
-        return name;
-    }
+    std::string getName() const;
 
-    void addNeighbor(Node* neighbor, int weight = 1) {
-        neighbors[neighbor] = weight;
-    }
+    node_iterator nb_begin();
+    node_iterator nb_end();
+    const_node_iterator nb_begin() const;
+    const_node_iterator nb_end() const;
 
-    auto begin() { return neighbors.begin(); }
-    auto end() { return neighbors.end(); }
-    auto begin() const { return neighbors.begin(); }
-    auto end() const { return neighbors.end(); }
+    void addNeighbour(Node* neighbour);
+    void removeNeighbour(Node* neighbour);
 };
+
+#endif
