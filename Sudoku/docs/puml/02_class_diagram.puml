@@ -1,0 +1,46 @@
+@startuml
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+class GameManager {
+    - board : SudokuBoard
+    - generator : SudokuGenerator
+    + GameManager()
+    + startGame() : void
+    - printRules() : void
+    - processMove(row : int, col : int, value : int) : void
+}
+
+class SudokuBoard {
+    - field : int[9][9]
+    - solution : int[9][9]
+    - fixedCells : bool[9][9]
+    + clear() : void
+    + print() : void
+    + makeMove(row : int, col : int, value : int) : bool
+    + clearCell(row : int, col : int) : bool
+    + isFull() : bool
+    + isSolved() : bool
+    + canPlace(board, row : int, col : int, value : int) : bool
+}
+
+class SudokuGenerator {
+    - solver : SudokuSolver
+    + generate(board : SudokuBoard, cellsToRemove : int) : void
+    - fillBoard(board, row : int, col : int, rules : SudokuBoard) : bool
+    - removeCells(board : SudokuBoard, cellsToRemove : int) : void
+    - shuffleArray(arr, size : int) : void
+}
+
+class SudokuSolver {
+    + solveBoard(board, rules : SudokuBoard) : bool
+    + countSolutions(board, rules : SudokuBoard, limit : int) : int
+}
+
+GameManager *-- SudokuBoard : содержит
+GameManager *-- SudokuGenerator : содержит
+SudokuGenerator *-- SudokuSolver : содержит
+SudokuGenerator --> SudokuBoard : генерирует поле
+SudokuSolver --> SudokuBoard : проверяет правила
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+actor "Игрок" as Player
+participant "main.cpp" as Main
+participant "GameManager" as GameManager
+participant "SudokuBoard" as Board
+
+Player -> Main : запускает программу
+Main -> GameManager : startGame()
+GameManager -> Board : print()
+Board --> GameManager : вывод поля
+GameManager --> Player : показывает поле
+
+Player -> GameManager : вводит row, col, value
+GameManager -> GameManager : processMove(row, col, value)
+
+alt value == 0
+    GameManager -> Board : clearCell(row, col)
+    Board --> GameManager : true / false
+    GameManager --> Player : сообщение о результате
+else value от 1 до 9
+    GameManager -> Board : makeMove(row, col, value)
+    Board -> Board : проверка границ
+    Board -> Board : проверка fixedCells
+    Board -> Board : canPlace()
+
+    alt Ход корректный
+        Board --> GameManager : true
+        GameManager --> Player : "Ход сделан"
+    else Ход некорректный
+        Board --> GameManager : false
+        GameManager --> Player : "Такой ход невозможен"
+    end
+end
+
+GameManager -> Board : isSolved()
+Board --> GameManager : true / false
+
+@enduml

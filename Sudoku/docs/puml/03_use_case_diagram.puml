@@ -1,0 +1,29 @@
+@startuml
+skinparam shadowing false
+skinparam defaultFontName Arial
+left to right direction
+
+actor "Игрок" as Player
+
+rectangle "Система Sudoku" {
+    usecase "Начать игру" as Start
+    usecase "Сгенерировать поле" as Generate
+    usecase "Посмотреть поле" as Show
+    usecase "Сделать ход" as Move
+    usecase "Очистить свою клетку" as Clear
+    usecase "Проверить ход" as CheckMove
+    usecase "Проверить победу" as CheckWin
+    usecase "Завершить игру" as Exit
+}
+
+Player --> Start
+Player --> Show
+Player --> Move
+Player --> Clear
+Player --> Exit
+
+Start ..> Generate : include
+Move ..> CheckMove : include
+Move ..> CheckWin : include
+
+@enduml
